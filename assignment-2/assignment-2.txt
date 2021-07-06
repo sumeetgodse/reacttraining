@@ -1,0 +1,82 @@
+Can we write code without JSX?
+-> Yes, we can write code without JSX using React.CreateElement().
+
+What is the benefit of writing ReactJs code with JSX?
+-> JSX enables support of HTML tags in JS. If we have a large codebase with multiple nested HTML elements, using React.CreateElement() is going to cause 
+difficulty in code readability, debugging and understanding. Hence, it is better to use JSX. It helps maintain code well organized and DRY.
+
+Does Browser understand JSX?
+-> No, JSX must be first translated into regular JS using JSX compiler. 
+
+What would happen if we directly run JSX in Browser?
+-> We will get a syntax error.
+
+What is state and why do we use it?
+-> Every component has a certain state which holds a set of properties. This set of properties define the behaviour of that component and makes it
+distinct from other components. We can also modify the state in order to change the behaviour of the component.
+
+Can we directly modify or update state?
+-> It is not recommended to directly modify or update state as the component wont be re-rendered to reflect the changes.
+
+How do you update a state variable?
+-> We can update a state variable using setState() function.
+
+Can anyone update the state variable?
+-> Only the component who owns the state can update the state variable.
+
+Are props mutable?
+-> No, props are immutable i.e. they cannot be changed.
+
+What can we pass in Props?(object, Components, string, functions)
+-> We can pass all of the above i.e. object, components, string, functions.
+
+What is the use of state variables?? Can’t we use normal variables?
+-> If we use normal variables instead of state variables, the component wont get re-rendered to reflect those changes.
+
+What is the use of props?
+-> Props stands for properties which is used to pass data to a component. Props are immutable.
+
+Is there any other way of passing data between components?
+-> We can use state management library like Redux.
+
+When to use functional Components?
+-> When we want the component to be stateless and just do the job of rendering a UI without any business logic.
+
+Are there any advantages or disadvantages of using functional components?
+-> Advantages:
+    a. Less code
+    b. Easier to read and test because they are like plain js functions without state or lifecycle hooks
+    c. Performance boost in future react versions
+    d. Easier to seperate presentational components from container components.
+   Disadvantages:
+    a. Cannot handle state(stateless)
+
+What are the lifecycle methods of class components and in which order are they called?
+-> Mounting - called when an instance of component is created and inserted in DOM
+    1. constructer() - initializing state, binding event handlers
+    2. static getDerivedStateFromProps(props, state) - dictates of components should be re-rendered or not
+    3. render() - the only required function in a class, used to render the UI
+    4. componentDidMount() - final method of mounting phase, perfect phase for side effects like loading data
+
+   Updating - 
+    1. static getDerivedStateFromProps(props, state) - called every time a component is re-rendered
+    2. shouldComponentUpdate(nextProps, nextState) - dictates of components should be re-rendered or not
+    3. render()
+    4. getSnapshotBeforeUpdate(prevProps, prevState) - capture some data before update
+    5. componentDidUpdate(prevProps, prevState, snapshot)
+
+   UnMounting - 
+    1. componentWillUnmount() - called when component is removed from DOM, cleanup can be performmed here
+
+   Error Handling -
+    1. static getDerivedStateFromError(error) - called when error thrown by descendant component
+    2. componentDidCatch(error, info) - used for logging errors
+
+What are keys and why do we use them in lists? 
+-> Keys are used for elements inside the list to give them a unique identity. They must be unique for each element.
+It helps react to identify which elements have been deleted, added or modified in case there is any re-render so that it can 
+only modify those specific elements.
+
+Why does React maintain a Virtual DOM?
+-> React uses an efficient algorithm to calculate the differences between current virtual DOM and it's previous versions. Only these differences are then 
+re-rendered in the original browser DOM instead of re-rendering the entire UI.
