@@ -7,10 +7,10 @@ function HelloWorld() {
   );
 }
 
-class Text extends React.Component {
-  render() {
-    return <h1>{this.props.message}</h1>;
-  }
+function Text(props) {
+  return (
+    <h1>{props.message}</h1>
+  );
 }
 
 function InputText(props) {
@@ -40,6 +40,9 @@ class FirstForm extends React.Component {
       placeholder: "Please enter input...",
       value: ""
     };
+
+    this.buttonHandler = this.buttonHandler.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   buttonHandler() {
@@ -52,7 +55,7 @@ class FirstForm extends React.Component {
   handleChange(event) {    
     this.setState({
       value: event.target.value
-    });  
+    }); 
   }
   
   render() {
@@ -60,9 +63,9 @@ class FirstForm extends React.Component {
       <>
         <HelloWorld />
         <Text message = {this.state.message} />
-        <Button label = {this.state.label} buttonHandler = {this.buttonHandler.bind(this)} />
+        <Button label = {this.state.label} buttonHandler = {this.buttonHandler} />
         <br /> <br />
-        <InputText placeholder = {this.state.placeholder} value = {this.state.value} handleChange = {this.handleChange.bind(this)} />
+        <InputText placeholder = {this.state.placeholder} value = {this.state.value} handleChange = {this.handleChange} />
       </>
     );
   }
