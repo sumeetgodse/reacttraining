@@ -1,27 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function HelloWorld() {
-  return (
-    <h1>Hello World!</h1>
-  );
+const HelloWorld = () => {
+  return <h1>Hello World!</h1>
 }
 
-function Text(props) {
-  return (
-    <h1>{props.message}</h1>
-  );
+const Text = (props) => {
+  return <h1>{props.message}</h1>
 }
 
-function InputText(props) {
+const InputText = (props) => {
   const {placeholder, value, handleChange} = props;
-  return (
-        <input type = "text" placeholder = {placeholder} value = {value} onChange = {handleChange} />
-  );
+
+  return <input type = "text" placeholder = {placeholder} value = {value} onChange = {handleChange} />
 }
 
-function Button(props) {
+const Button = (props) => {
   const {label, buttonHandler} = props;
+  
   return (
       <>
           <input type = "button" id = "button" value = "Submit" onClick = {buttonHandler} />
