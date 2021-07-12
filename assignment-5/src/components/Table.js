@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Table = (props) => {
     const items = Object.entries(props.items).slice(0,-1);
 
