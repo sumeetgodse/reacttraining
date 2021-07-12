@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Gender = (props) => {
     return (
         <div onChange = {props.onChange}>
@@ -8,6 +6,7 @@ const Gender = (props) => {
             <label htmlFor = "male">Male</label>
             <input type = "radio" id = "female" value = "Female" name = "gender" />
             <label htmlFor = "female">Female</label>
+            <p style = {{ color: 'red' }} id = "genderError" />
         </div>
     )
 }
