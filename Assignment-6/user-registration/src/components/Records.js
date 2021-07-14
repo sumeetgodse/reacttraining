@@ -17,12 +17,18 @@ const Records = (props) => {
     const classes = useStyles();
 
     return (
-        <TableContainer style = {{width: "90%", marginLeft: "5%"}} component={Paper}>
+        <TableContainer style = {{width: "96%", marginLeft: "2%"}} component={Paper}>
         <Table className={classes.table} aria-label="simple table">
         <TableBody>
         <TableRow>
           <TableCell><b>Name</b></TableCell>
           <TableCell><b>Email</b></TableCell>
+          <TableCell><b>Date of Birth</b></TableCell>
+          <TableCell><b>Education</b></TableCell>
+          <TableCell><b>Gender</b></TableCell>
+          <TableCell><b>Profile Pic Url</b></TableCell>
+          <TableCell><b>Password</b></TableCell>
+          <TableCell><b>Confirmed Password</b></TableCell>
         </TableRow>
         {
           props.userData.map((data, i) => {
@@ -30,6 +36,12 @@ const Records = (props) => {
               <TableRow key = {i}>
                 <TableCell>{data.name}</TableCell>
                 <TableCell>{data.email}</TableCell>
+                <TableCell>{data.dob}</TableCell>
+                <TableCell>{data.education}</TableCell>
+                <TableCell>{data.gender}</TableCell>
+                <TableCell>{data.profilePicUrl}</TableCell>
+                <TableCell>{data.password}</TableCell>
+                <TableCell>{data.confirmPassword}</TableCell>
                 <TableCell>
                     <Button variant="contained" color="primary" onClick={() => props.handleEdit(i)}>
                         Edit
