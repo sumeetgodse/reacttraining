@@ -1,0 +1,73 @@
+import Button from '@material-ui/core/Button';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import { store, deleteData } from "../store/store"
+import { useSelector } from 'react-redux';
+
+const useStyles = makeStyles({
+    table: {
+      minWidth: 650,
+    },
+  });
+
+const RecordsRedux = (props) => {
+    const classes = useStyles();
+
+    const records = useSelector((state) => state.formReducer)
+
+    const handleDelete = (email) => {
+      store.dispatch(deleteData(email))
+    }
+
+    return (
+        <TableContainer style = {{width: "96%", marginLeft: "2%"}} component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+        <TableBody>
+        <TableRow>
+          <TableCell><b>Name</b></TableCell>
+          <TableCell><b>Email</b></TableCell>
+          <TableCell><b>Date of Birth</b></TableCell>
+          <TableCell><b>Education</b></TableCell>
+          <TableCell><b>Gender</b></TableCell>
+          <TableCell><b>Profile Pic Url</b></TableCell>
+          <TableCell><b>Password</b></TableCell>
+          <TableCell><b>Confirmed Password</b></TableCell>
+        </TableRow>
+        {
+          records.map((data, i) => {
+            return(
+              <TableRow key = {i}>
+                <TableCell>{data.name}</TableCell>
+                <TableCell>{data.email}</TableCell>
+                <TableCell>{data.dob}</TableCell>
+                <TableCell>{data.education}</TableCell>
+                <TableCell>{data.gender}</TableCell>
+                <TableCell>{data.profilePicUrl}</TableCell>
+                <TableCell>{data.password}</TableCell>
+                <TableCell>{data.confirmPassword}</TableCell>
+                <TableCell>
+                    <Button variant="contained" color="primary" onClick = {() => props.handleEdit(i)} >
+                        Edit
+                    </Button>
+                </TableCell>
+                <TableCell>
+                    <Button variant="contained" color="secondary" onClick = {() => handleDelete(data.email)} >
+                        Delete
+                    </Button>
+                </TableCell> 
+              </TableRow>
+            )
+          })
+        }
+        </TableBody>
+        </Table>
+        </TableContainer>
+    )
+}
+
+export default RecordsRedux;
