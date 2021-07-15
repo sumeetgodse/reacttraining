@@ -1,0 +1,31 @@
+Should you keep all component states in the Redux store?
+->  Although it is possible to keep all component states in Redux store, we must avoid it. Implementing the action-reducer cycle can be time consuming. Before keeping a component state in redux we should think of below questions -
+    1. It the data critical?
+    2. Do other components depend on this data?
+    3. Is the same data being used throughout the application to drive multiple components?
+If data is non-critical i.e. it does not affect any other part of the application except for its own component then there is no need to keep that data in redux store.
+
+Explain Redux in your own words
+->  Redux consists of a central store which is responsible for holding entire state of the application. Each component can access the stored state without having to pass down props from one component to another. There are 3 major parts in Redux which are actions, store and reducers.
+
+What are reducers and actions?
+->  Actions are plain javascript objects which tell the reducers what needs to be done based upon the type of that action. They are the only source of information for the store. These actions need to be dispatched on order to perform a certain operation on the state stored inside the store.
+
+Reducers are pure functions which take the state and action as input parameters and return a brand new state after performing some operations on current state based upon the action type. 
+
+Why should a reducer return a new state object?
+->  A new state object will also have a new memory location. This is how redux comes to know that some changes have taken place in the state of the application. In case we modify the same state object redux will not understand that certain changes have taken place in the state.
+
+When an action is dispatched, are all the reducers called?
+->  Yes all reducers are called when an action is dispatched. Only the reducers which match the action type will perform action on the state and return a new state while the rest will return default state.
+
+What are the core principles of Redux?
+->  1. Single source of truth. 
+    2. State is read only.
+    3. Changes are made with pure functions ie reducers.
+
+Why should you use redux in your app?
+->  If we have a large application wth complex state management through different components, redux will help us by providing a single source of truth. We can avoid prop drilling which can sometimes become tiresome if there are complex state management operations, and we can directly access the application state from the redux store. Redux is also optimized to cut down unnecassary re renders. If the codebase is worked upon by many people, debugging will be easier if we use redux and it becomes easier to understand how the data flows in the application.
+
+How Redux Works - Redux Workflow?
+->  Suppose we want to perform a state change on basis of an onclick event, so now instead of using the handlechange function, we can use the dispatch(action()) function which will invoke the corresponding reducer based upon the action type and this reducer will perform the changes on the state and return a new state object. This new state can now be accessed throughout the application by different components using useSelecter().
