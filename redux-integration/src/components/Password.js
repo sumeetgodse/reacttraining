@@ -11,7 +11,7 @@ const Password = (props) => {
     }
 
     return (
-        <div style = {{height: "30px", padding: "10px"}}>
+        <div style = {{height: "40px", padding: "10px"}}>
             <input style = {{height: "30px", border: "none", borderBottom: "1px solid black"}} type = "password" ref = {props.pwdRef} placeholder = "Enter Password" onChange = {handleChange} />
             <p style = {{color: "red", fontSize: "10px"}} id = "errorPwd" />
         </div>

@@ -11,7 +11,7 @@ const Email = (props) => {
     }
 
     return (
-        <div style = {{height: "30px", padding: "10px"}}>
+        <div style = {{height: "40px", padding: "10px"}}>
             <input style = {{height: "30px", border: "none", borderBottom: "1px solid black"}} type = "text" ref = {props.txtEmail} placeholder = "Email (abc@gmail.com)" onChange = {handleChange} />
             <p style = {{color: "red", fontSize: "10px"}} id = "errorEmail" />
         </div>

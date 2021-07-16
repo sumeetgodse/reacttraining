@@ -1,4 +1,4 @@
-const validate_date = (date) => {
+export const validate_date = (date) => {
     const varDate = new Date(date);
     const today = new Date();
 
@@ -9,4 +9,11 @@ const validate_date = (date) => {
     return true;
 }
 
-export { validate_date };
+export const getUserData = () => {
+  const userData = localStorage.getItem('userData')
+  if (userData && userData.length) {
+      return JSON.parse(userData)
+  } else {
+      return []
+  }
+}

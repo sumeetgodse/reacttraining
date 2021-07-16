@@ -11,28 +11,26 @@ import Education from "./Education";
 
 const Form = (props) => {
         return (
-            <form style = {{marginTop: "10px", marginBottom: "10px", borderRadius: "12px", width: "60%", marginLeft: "20%", border: "1px solid black", padding: "5px"}} id = "myForm">
-                <h4 style = {{textAlign: "center"}}>Registration Form</h4>
-                <div style = {{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <Name txtName = {props.txtName} />
-                    <Email txtEmail = {props.txtEmail} />
-                    <DateOfBirth dobRef = {props.dobRef} />
+            <form style = {{fontFamily: "Inter, sans-serif", marginTop: "10px", marginBottom: "10px", borderRadius: "12px", width: "60%", marginLeft: "20%", padding: "5px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"}} id = "myForm">
+                <div style = {{paddingTop: "20px", paddingBottom: "20px", textAlign: "center", color: "#4a148c", fontSize: "24px"}}><b>REGISTRATION FORM</b></div>
+                <div style = {{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <div style = {{width: "33%"}}>
+                        <Name txtName = {props.txtName} />
+                        <Email txtEmail = {props.txtEmail} />
+                        <DateOfBirth dobRef = {props.dobRef} />
+                    </div>
+                    <div  style = {{width: "34%", marginTop: "20px"}}>
+                        <Gender maleRef = {props.maleRef} femaleRef = {props.femaleRef} />
+                        <ProfilePic profilePicRef = {props.profilePicRef} />
+                        <Education educationRef = {props.educationRef} />
+                    </div>
+                    <div  style = {{width: "33%"}}>
+                        <Password pwdRef = {props.pwdRef} />
+                        <ConfirmPassword pwdRef = {props.pwdRef} confirmPwdRef = {props.confirmPwdRef} />    
+                    </div>
                 </div>
-                <div style = {{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <ProfilePic profilePicRef = {props.profilePicRef} />
-                </div>
-                <div style = {{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <Gender maleRef = {props.maleRef} femaleRef = {props.femaleRef} />
-                </div>
-                <div style = {{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <Education educationRef = {props.educationRef} />
-                </div>
-                <div style = {{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <Password pwdRef = {props.pwdRef} />
-                    <ConfirmPassword pwdRef = {props.pwdRef} confirmPwdRef = {props.confirmPwdRef} />
-                </div>
-                <div style = {{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <Button style = {{marginTop: "20px"}} variant="contained" color="primary" onClick = {(e) => props.handleSubmit(e)}>
+                <div style = {{display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "20px", paddingBottom: "20px"}}>
+                    <Button variant="contained" color="primary" onClick = {(e) => props.handleSubmit(e)}>
                         Submit
                     </Button>
                 </div>

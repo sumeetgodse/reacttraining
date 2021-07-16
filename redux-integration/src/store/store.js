@@ -1,49 +1,37 @@
-import { combineReducers, createStore } from "redux"
+import { createSlice } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import { getUserData } from "../utilities/utility";
 
-// actions
-export const addData = (record) => {
-    return {
-        type: "ADD_DATA",
-        payload: record
-    }
-}
-
-export const deleteData = (email) => {
-    return {
-        type: "DELETE_DATA",
-        payload: email
-    }
-}
-
-export const editData = (index, record) => {
-    return {
-        type: "EDIT_DATA",
-        index: index,
-        payload: record
-    }
-}
-
-// reducers
-const formReducer = (oldUserData = [], action) => {
-    if( action.type === "ADD_DATA" ) {
-        return [...oldUserData, action.payload]
-    }
-    if( action.type === "DELETE_DATA" ) {
-        return oldUserData.filter((item) => item.email !== action.payload)
-    }
-    if( action.type === "EDIT_DATA" ) {
-        return oldUserData.filter((item, i) => {
-            if( i!== action.index ) {
-                return item;
-            } else {
-                return action.payload;
+const formDataSlice = createSlice({
+    name: "formData",
+    initialState: getUserData(),
+    reducers: {
+        addData: (state, action) => { 
+            state.push(action.payload)
+            localStorage.setItem('userData', JSON.stringify(state)) 
+        },
+        deleteData: (state, action) => { 
+            for(let i = 0; i < state.length; i++ ) {
+                if( state[i].email === action.payload ) {
+                    state.splice(i, 1);
+                    break;
+                }
             }
-        })
+            localStorage.setItem('userData', JSON.stringify(state)) 
+        },
+        editData: (state,action) => {
+            state[action.payload.index] = action.payload.editUser;
+            localStorage.setItem('userData', JSON.stringify(state)) 
+        }
     }
-    return oldUserData;
-}
+})
 
-// store
-const rootReducer = combineReducers({formReducer})
+export const { addData, deleteData, editData } = formDataSlice.actions;
 
-export const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const formReducer = formDataSlice.reducer;
+
+export const store = configureStore({
+    reducer: {
+        formReducer: formReducer
+    }
+})

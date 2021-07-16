@@ -26,14 +26,13 @@ class HomePage extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const userData = store.getState().formReducer[this.state.index];
-    const name = this.txtName.current.value;
-    const email = this.txtEmail.current.value;
-    const password = this.pwdRef.current.value;
-    const confirmPassword = this.confirmPwdRef.current.value;
-    const profilePicUrl = this.profilePicRef.current.value;
-    const dob = this.dobRef.current.value;
-    const education = this.educationRef.current.value;
+    let name = this.txtName.current.value;
+    let email = this.txtEmail.current.value;
+    let password = this.pwdRef.current.value;
+    let confirmPassword = this.confirmPwdRef.current.value;
+    let profilePicUrl = this.profilePicRef.current.value;
+    let dob = this.dobRef.current.value;
+    let education = this.educationRef.current.value;
     let gender;
     this.maleRef.current.checked ? gender = "Male" : gender = "Female";
     
@@ -51,15 +50,17 @@ class HomePage extends React.Component {
       store.dispatch(addData(newUser));
     } else {
       const index = this.state.index;
-      userData.name = name;
-      userData.email = email;
-      userData.password = password;
-      userData.confirmPassword = confirmPassword;
-      userData.profilePicUrl = profilePicUrl;
-      userData.dob = dob;
-      userData.education = education;
-      userData.gender = gender;
-      store.dispatch(editData(index,userData))
+      const editUser = {
+        "name": name,
+        "email": email,
+        "password": password,
+        "confirmPassword": confirmPassword,
+        "profilePicUrl": profilePicUrl,
+        "dob": dob,
+        "education": education,
+        "gender": gender
+      }
+      store.dispatch(editData({index,editUser}))
     }
 
     this.setState({

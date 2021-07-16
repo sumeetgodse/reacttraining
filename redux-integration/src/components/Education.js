@@ -1,6 +1,6 @@
 const Education = (props) => {
     return (
-        <div style = {{height: "30px", padding: "10px"}}>
+        <div style = {{height: "40px", padding: "10px", marginTop: "10px"}}>
             <select name = "education" ref = {props.educationRef}>
                 <option value = "">-- Please Select Education --</option>  
                 <option value = "Post-Graduate">Post Graduate</option>  
