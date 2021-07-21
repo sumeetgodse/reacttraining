@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { configureStore } from "@reduxjs/toolkit";
+import { getPastReminders, getReminders } from "../utilities/utility";
 
 const editReminderSlice = createSlice({
     name: "editReminder",
@@ -20,10 +21,11 @@ const editReminderReducer = editReminderSlice.reducer;
 
 const pastRemindersSlice = createSlice({
     name: "pastReminders",
-    initialState: [],
+    initialState: getPastReminders(),
     reducers: {
         addPastReminder: (state, action) => { 
             state.push(action.payload);
+            localStorage.setItem("pastReminders", JSON.stringify(state));
         },
         deletePastReminder: (state, action) => { 
             for(let i = 0; i < state.length; i++ ) {
@@ -32,6 +34,7 @@ const pastRemindersSlice = createSlice({
                     break;
                 }
             }
+            localStorage.setItem("pastReminders", JSON.stringify(state));
         }
     }
 })
@@ -42,7 +45,7 @@ const pastRemindersReducer = pastRemindersSlice.reducer;
 
 const remindersSlice = createSlice({
     name: "reminders",
-    initialState: [],
+    initialState: getReminders(),
     reducers: {
         addReminder: (state, action) => { 
             state.push(action.payload);
@@ -50,6 +53,8 @@ const remindersSlice = createSlice({
             state.length > 1 && state.sort((a,b) => {
                 return a.date.getTime() - b.date.getTime();
             })
+
+            localStorage.setItem("reminders", JSON.stringify(state));
         },
         deleteReminder: (state, action) => { 
             for(let i = 0; i < state.length; i++ ) {
@@ -58,6 +63,8 @@ const remindersSlice = createSlice({
                     break;
                 }
             }
+
+            localStorage.setItem("reminders", JSON.stringify(state));
         },
         editReminder: (state, action) => {
             state[action.payload.editIndex] = action.payload.newReminder;
@@ -65,6 +72,8 @@ const remindersSlice = createSlice({
             state.length > 1 && state.sort((a,b) => {
                 return a.date.getTime() - b.date.getTime();
             })
+
+            localStorage.setItem("reminders", JSON.stringify(state));
         }
     }
 })

@@ -51,13 +51,13 @@ const Reminder = () => {
 
         if( editIndex === -1 ) {
             store.dispatch(addReminder(newReminder));
-            setText("");
-            setDate(newDate);
-            setTime(newDate);
         } else {
             store.dispatch(editReminder({editIndex, newReminder}));
             store.dispatch(clearEditIndex(-1));
         }
+        setText("");
+        setDate(newDate);
+        setTime(newDate);
     }
 
     return(
