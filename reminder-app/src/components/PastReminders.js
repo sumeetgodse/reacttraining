@@ -11,6 +11,9 @@ const PastReminders = () => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+    const userIndex = useSelector((state) => state.loggedIndexReducer[0]);
+    const userEmail = useSelector((state) => state.userReducer[userIndex].email);
+
     return(
         <div>
         <div className = "p-reminder-header">
@@ -21,6 +24,7 @@ const PastReminders = () => {
         {
             reminders.map((reminder,index) => {
                 return (
+                    reminder.email === userEmail &&
                     <div key = {`${reminder.text}_${reminder.date}`} className="column">
                         <div className="card" style = {{backgroundColor: "#ffe0b2"}}>
                             <table>

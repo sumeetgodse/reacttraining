@@ -31,7 +31,6 @@
 .reminder-header {
     background-color: #263238; 
     display: flex; 
-    justify-content: center;
     align-items: center; 
     margin-bottom: 20px;
 }
@@ -40,6 +39,7 @@
     padding: 20px;
     color: #ffcc80;
     font-size: 42px;
+    margin-left: 36%;
 }
 
 .reminder-header-text {
@@ -48,9 +48,18 @@
     font-size: 32px; 
     padding: 20px; 
     color: #ffcc80;
+    margin-left: 0%;
 }
 
 .reminder-form {
     display: flex; 
     justify-content: center;
+}
+
+.logout {
+    color: white;
+}
+
+.logout:hover {
+    cursor: pointer;
 }

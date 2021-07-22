@@ -9,7 +9,6 @@ import "../styles/preminders.css";
 import "../styles/buttons.css";
 import ComingReminders from "./ComingReminders";
 import PastReminders from "./PastReminders";
-import TodayTwoToneIcon from '@material-ui/icons/TodayTwoTone';
 import { useSelector } from "react-redux";
 
 const Reminder = () => {        
@@ -19,6 +18,9 @@ const Reminder = () => {
     const [date, setDate] = useState(newDate);
     const [time, setTime] = useState(newDate);
     
+    const userIndex = useSelector((state) => state.loggedIndexReducer[0]);
+    const userEmail = useSelector((state) => state.userReducer[userIndex].email);
+
     const editIndex = useSelector((state) => state.editReminderReducer[0]);
 
     useEffect(() => {
@@ -44,6 +46,7 @@ const Reminder = () => {
     
     const handleSubmit = () => {
         const newReminder = {
+            email: userEmail,
             text: text,
             date: date,
             time: time
@@ -62,10 +65,6 @@ const Reminder = () => {
 
     return(
         <div>
-            <div className = "reminder-header">
-                <TodayTwoToneIcon className = "reminder-header-icon" style = {{fontSize: "42px"}} />
-                <div className = "reminder-header-text">Reminder App</div>
-            </div>
             <div className = "reminder-form">
                 <div className = "reminder-container">
                     <Text value = {text} onChange = {(e) => handleTextChange(e)} />

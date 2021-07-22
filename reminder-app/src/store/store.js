@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { configureStore } from "@reduxjs/toolkit";
-import { getPastReminders, getReminders } from "../utilities/utility";
+import { getReminders, storeInLocal } from "../utilities/utility";
+import { loggedIndexReducer, userReducer } from "./userReducer";
 
 const editReminderSlice = createSlice({
     name: "editReminder",
@@ -21,11 +22,11 @@ const editReminderReducer = editReminderSlice.reducer;
 
 const pastRemindersSlice = createSlice({
     name: "pastReminders",
-    initialState: getPastReminders(),
+    initialState: getReminders("pastReminders"),
     reducers: {
         addPastReminder: (state, action) => { 
             state.push(action.payload);
-            localStorage.setItem("pastReminders", JSON.stringify(state));
+            storeInLocal("pastReminders", JSON.stringify(state));
         },
         deletePastReminder: (state, action) => { 
             for(let i = 0; i < state.length; i++ ) {
@@ -34,7 +35,7 @@ const pastRemindersSlice = createSlice({
                     break;
                 }
             }
-            localStorage.setItem("pastReminders", JSON.stringify(state));
+            storeInLocal("pastReminders", JSON.stringify(state));
         }
     }
 })
@@ -45,7 +46,7 @@ const pastRemindersReducer = pastRemindersSlice.reducer;
 
 const remindersSlice = createSlice({
     name: "reminders",
-    initialState: getReminders(),
+    initialState: getReminders("reminders"),
     reducers: {
         addReminder: (state, action) => { 
             state.push(action.payload);
@@ -53,8 +54,7 @@ const remindersSlice = createSlice({
             state.length > 1 && state.sort((a,b) => {
                 return a.date.getTime() - b.date.getTime();
             })
-
-            localStorage.setItem("reminders", JSON.stringify(state));
+            storeInLocal("reminders", JSON.stringify(state));
         },
         deleteReminder: (state, action) => { 
             for(let i = 0; i < state.length; i++ ) {
@@ -63,8 +63,7 @@ const remindersSlice = createSlice({
                     break;
                 }
             }
-
-            localStorage.setItem("reminders", JSON.stringify(state));
+            storeInLocal("reminders", JSON.stringify(state));
         },
         editReminder: (state, action) => {
             state[action.payload.editIndex] = action.payload.newReminder;
@@ -72,8 +71,7 @@ const remindersSlice = createSlice({
             state.length > 1 && state.sort((a,b) => {
                 return a.date.getTime() - b.date.getTime();
             })
-
-            localStorage.setItem("reminders", JSON.stringify(state));
+            storeInLocal("reminders", JSON.stringify(state));
         }
     }
 })
@@ -86,7 +84,9 @@ export const store = configureStore({
     reducer: {
         remindersReducer: remindersReducer,
         pastRemindersReducer: pastRemindersReducer,
-        editReminderReducer: editReminderReducer
+        editReminderReducer: editReminderReducer,
+        userReducer: userReducer,
+        loggedIndexReducer: loggedIndexReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false
