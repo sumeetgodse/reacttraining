@@ -3,7 +3,9 @@
     padding: 10px 10px;
 }
   
-.row {margin: 0 -5px;}
+.row {
+    margin: 0 -5px;
+}
   
 .row:after {
     content: "";
@@ -15,7 +17,6 @@
     font-family: 'Inter', sans-serif;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 8px;
-    text-align: center;
     background-color: #c5e1a5;
     margin-left: 8px;
 }
@@ -24,7 +25,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     height: 500px;
-    width: 30%;
+    width: calc(30%);
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin: 0 auto;

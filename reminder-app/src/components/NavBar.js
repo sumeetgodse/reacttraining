@@ -16,7 +16,9 @@ const NavBar = () => {
     return(
         <div className = "reminder-header">
             <TodayTwoToneIcon className = "reminder-header-icon" style = {{fontSize: "42px"}} />
-            <div className = "reminder-header-text">Reminder App</div>
+            <div className = "reminder-header-text">
+                Reminder App
+            </div>
             {
                 loggedIndex !== -1 && 
                 <IconButton style = {{marginLeft: "30%"}} onClick = {() => {handleLogOut()}}>

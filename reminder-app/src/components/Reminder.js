@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Date from "./Date";
 import Text from "./Text";
 import Time from "./Time";
-import { addReminder, clearEditIndex, editReminder, store } from "../store/store";
+import { store } from "../store/store";
 import "../styles/reminder.css";
 import "../styles/ureminder.css";
 import "../styles/preminders.css";
@@ -10,6 +10,7 @@ import "../styles/buttons.css";
 import ComingReminders from "./ComingReminders";
 import PastReminders from "./PastReminders";
 import { useSelector } from "react-redux";
+import { addReminder } from "../store/reminderReducer";
 
 const Reminder = () => {        
     const newDate = new window.Date();
@@ -20,17 +21,6 @@ const Reminder = () => {
     
     const userIndex = useSelector((state) => state.loggedIndexReducer[0]);
     const userEmail = useSelector((state) => state.userReducer[userIndex].email);
-
-    const editIndex = useSelector((state) => state.editReminderReducer[0]);
-
-    useEffect(() => {
-        if(editIndex !== -1) {
-            const editedReminder = store.getState().remindersReducer[editIndex];
-            setText(editedReminder.text);
-            setDate(editedReminder.date);
-            setTime(editedReminder.time);
-        }
-    }, [editIndex]);
 
     const handleTextChange = (e) => {
         setText(e.target.value);
@@ -52,12 +42,7 @@ const Reminder = () => {
             time: time
         }
 
-        if( editIndex === -1 ) {
-            store.dispatch(addReminder(newReminder));
-        } else {
-            store.dispatch(editReminder({editIndex, newReminder}));
-            store.dispatch(clearEditIndex(-1));
-        }
+        store.dispatch(addReminder(newReminder));
         setText("");
         setDate(newDate);
         setTime(newDate);
@@ -65,6 +50,9 @@ const Reminder = () => {
 
     return(
         <div>
+            <div style = {{fontFamily: "sans-serif", padding: "5px", marginLeft: "20px"}}>
+                Welcome <b>{userEmail}</b>!
+            </div>
             <div className = "reminder-form">
                 <div className = "reminder-container">
                     <Text value = {text} onChange = {(e) => handleTextChange(e)} />

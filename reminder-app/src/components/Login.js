@@ -39,21 +39,21 @@ const Login = () => {
         }
         if( i === users.length ) {
             setEmailError(true);
+            setEmail("");
         }
-        setEmail("");
         setPassword("");
     }
 
     return(
-        <div className = "login-container">
+        <div data-testid = "login" className = "login-container">
             <div className = "login-header">
                 Log In
             </div>
             <div className = "login-input">
-                <TextField error = {emailError} value = {email} onChange = {(e) => handleEmailChange(e)} id = "outlined-basic" label = {emailError ? "Invalid Email!" : "Email"} variant = "outlined" fullWidth />
+                <TextField error = {emailError} value = {email} onChange = {(e) => handleEmailChange(e)} label = {emailError ? "Invalid Email!" : "Email"} variant = "outlined" fullWidth />
             </div>
             <div className = "login-input">
-                <TextField type = "password" error = {passwordError} value = {password} onChange = {(e) => handlePasswordChange(e)} id = "outlined-basic" label = {passwordError ? "Invalid Password!" : "Password"} variant = "outlined" fullWidth />
+                <TextField type = "password" error = {passwordError} value = {password} onChange = {(e) => handlePasswordChange(e)} label = {passwordError ? "Invalid Password!" : "Password"} variant = "outlined" fullWidth />
             </div>
             <div className = "login-button-container">
                 <input onClick = {handleLogin} className = "login-button" type = "button" value = "Log In" />
